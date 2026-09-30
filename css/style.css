@@ -1,0 +1,137 @@
+:root{
+  --bg:#1b1224;
+  --bg2:#2a1b38;
+  --panel:#2f1f3f;
+  --panel2:#3a2750;
+  --ink:#fdf3ff;
+  --muted:#c9a9dd;
+  --accent:#ff6fb5;
+  --accent2:#7ad7ff;
+  --radius:14px;
+  --shadow:0 8px 24px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:"Segoe UI",system-ui,Roboto,Arial,sans-serif;
+  color:var(--ink);
+  background:linear-gradient(160deg,var(--bg),var(--bg2));
+  min-height:100vh;
+}
+
+.topbar{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:12px;flex-wrap:wrap;
+  padding:12px 18px;
+  background:rgba(0,0,0,.25);
+  border-bottom:1px solid rgba(255,255,255,.08);
+  position:sticky;top:0;z-index:10;
+}
+.topbar h1{
+  margin:0;font-size:20px;letter-spacing:.5px;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.actions{display:flex;gap:8px;flex-wrap:wrap}
+.btn{
+  border:1px solid rgba(255,255,255,.18);
+  background:var(--panel2);
+  color:var(--ink);
+  padding:9px 14px;border-radius:999px;
+  cursor:pointer;font-size:14px;
+  transition:transform .12s ease, background .2s ease;
+}
+.btn:hover{transform:translateY(-2px);background:#4a3163}
+.btn:active{transform:translateY(0)}
+.btn.primary{background:linear-gradient(90deg,var(--accent),#ff9ad4);border:none;color:#37132a;font-weight:600}
+.btn.ghost{background:transparent}
+
+.layout{
+  display:grid;
+  grid-template-columns:minmax(280px,1fr) minmax(320px,420px);
+  gap:18px;
+  padding:18px;
+  align-items:start;
+  max-width:1200px;
+  margin:0 auto;
+}
+
+.stage-wrap{display:flex;flex-direction:column;align-items:center;gap:10px}
+.stage{
+  position:relative;
+  width:100%;
+  max-width:420px;
+  aspect-ratio:4/7;
+  border-radius:22px;
+  overflow:hidden;
+  box-shadow:var(--shadow);
+  border:3px solid rgba(255,255,255,.14);
+  background:#2a1b38;
+}
+.stage svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.hint{margin:0;color:var(--muted);font-size:13px;text-align:center}
+
+.panel{
+  background:var(--panel);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  overflow:hidden;
+  display:flex;flex-direction:column;
+  max-height:calc(100vh - 110px);
+  position:sticky;top:78px;
+}
+.tabs{
+  display:flex;flex-wrap:wrap;gap:6px;
+  padding:10px;
+  background:rgba(0,0,0,.18);
+}
+.tab{
+  border:1px solid rgba(255,255,255,.14);
+  background:transparent;color:var(--muted);
+  padding:7px 11px;border-radius:999px;cursor:pointer;
+  font-size:13px;white-space:nowrap;
+}
+.tab.active{background:var(--accent);color:#37132a;border-color:transparent;font-weight:600}
+.tab:hover:not(.active){color:var(--ink)}
+
+.tab-body{padding:12px;overflow:auto}
+.items{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(78px,1fr));
+  gap:8px;
+}
+.item{
+  background:var(--panel2);
+  border:2px solid transparent;
+  border-radius:12px;
+  padding:6px 4px;
+  cursor:pointer;
+  text-align:center;
+  transition:transform .12s ease,border-color .2s;
+}
+.item:hover{transform:translateY(-2px)}
+.item.active{border-color:var(--accent)}
+.item .thumb{width:100%;aspect-ratio:1;display:block}
+.item .name{font-size:11px;color:var(--muted);margin-top:2px;line-height:1.2}
+.item.active .name{color:var(--ink)}
+
+.swatches{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;align-items:center}
+.swatches .lbl{font-size:12px;color:var(--muted);width:100%}
+.swatch{
+  width:30px;height:30px;border-radius:50%;
+  border:2px solid rgba(255,255,255,.25);cursor:pointer;
+}
+.swatch.active{border-color:var(--accent);box-shadow:0 0 0 2px rgba(255,111,181,.35)}
+
+.toast{
+  position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);
+  background:#000;color:#fff;padding:10px 18px;border-radius:999px;
+  opacity:0;pointer-events:none;transition:.25s;z-index:50;font-size:14px;
+}
+.toast.show{opacity:.92;transform:translate(-50%,0)}
+
+@media (max-width:820px){
+  .layout{grid-template-columns:1fr}
+  .panel{position:static;max-height:none}
+}
